@@ -2,164 +2,186 @@
 
 <html>
 
-<style type="text/css">  
-.space
-{
-display: inline-block;
-margin-right:5px;
-list-style-type:none;
-background-color:red;
-height:50px;
-width:70px;
-border:ridge;
-font-size:50px;
-}
+	<style type="text/css">  
+	.space
+	{
+	display: inline-block;
+	margin-right:5px;
+	list-style-type:none;
+	background-color:red;
+	height:50px;
+	width:70px;
+	border:ridge;
+	font-size:50px;
+	}
 
 
-.letter{
-font-size:50px;
-height:50px;
-width:50px;
-background-image:url("letbox.PNG");
-margin-left:10px;
-text-align:center;
-position:relative;
-list-style-type:none;
-display:inline-block;
-margin-top:-px;
-font-style-type:Kristen ITC;
-border:ridge;
-cursor:default;
-}
+	.letter{
+	font-size:50px;
+	height:50px;
+	width:50px;
+	background-image:url("letbox.png");
+	margin-left:10px;
+	text-align:center;
+	position:relative;
+	list-style-type:none;
+	display:inline-block;
+	margin-top:-px;
+	font-style-type:Kristen ITC;
+	border:ridge;
+	cursor:default;
+	}
 
-#lettersdiv{
-height:600px;
-width:450px;
-}
-
-
-body{
-background-image:url("background.PNG");
-background-color:black;
-}
-</style>
+	#lettersdiv{
+	height:600px;
+	width:450px;
+	}
 
 
-
-<head>
-<title> Hangman! </title>
-<meta charset="utf-8" />
-</head>
-
-<style type="text/css">
-</style>
-<body>
-<header id="banner" style="height:264px;width:856px;background-image:url(banner.PNG);position:absolute;margin-left:450px;margin-top:-70px;">  </header>
-<div id="hanger"   style="height:592px;width:692px;border:none;position:absolute;margin-top:100px;margin-left:400px;background-image:url('hangman0.PNG')" > 
- </div>
-<h1 id="message" style="color:white;"> Click a letter to guess the word</h1>
-<div id="lettersdiv"><ul id="letters" style="margin-top:-10px;margin-left:-40px"></ul></div> 
-<div id="tip" style="color:white;font-size:50px;margin-top:-300px;"></div>
-<ul id="space" style="position:absolute;top:620px;left:470px;"> </ul>
+	body{
+	background-image:url("background.png");
+	background-color:black;
+	}
+	
+	</style>
 
 
-</body>
+
+	<head>
+		<title> Hangman! </title>
+		<meta charset="utf-8" />
+	</head>
+
+	<body>
+		<header id="banner" 
+		style="height:264px;width:856px;background-image:url(banner.png);position:absolute;margin-left:450px;margin-top:-70px;">  
+		</header>
+	
+		<div id="hanger"   
+		style="height:592px;width:692px;border:none;position:absolute;margin-top:100px;margin-left:400px;background-image:url('hangman0.png')" > 
+	    </div>
+	
+		<h1 id="message" style="color:white;"> Click a letter to guess the word
+	 	</h1>
+	
+
+		<div id="lettersdiv">
+			<ul id="letters" style="margin-top:-10px;margin-left:-40px"></ul>
+		</div> 
+	
+		<div id="tip" style="color:white;font-size:50px;margin-top:-300px;">
+		</div>
+		
+		<ul id="space" style="position:absolute;top:620px;left:470px;"> 
+		</ul>
 
 
-<script>
+	</body>
 
-var turn =0
-var hanger= document.getElementById("hanger")
- var hangman = ["url('hangman.PNG')","url('hangman2.PNG')","url('hangman3.PNG')","url('hangman4.PNG')","url('hangman5.PNG')","url('hangman6.PNG')"]
- var spaces=[]
- var spacesput=[]
-var word = prompt("Write the word to find").toUpperCase()
-var tip = prompt("Add a tip if you wish!")
- var found= 0
- var lettersname=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"," "],letters=[]
 
- var say
- var functione = function(e){say = e.target.innerHTML}
- //Player chooses a letter
- function choose(){
-for(var i=0;i<lettersname.length;i++){
-letters[i].addEventListener("click",functione,false)
-}
-setInterval(function(){
-if(say){
+	<script>
 
-picking(say.toUpperCase())
-say=false
-for(var i=0;i<lettersname.length;i++){
-letters[i].removeEventListener("click",functione,false)
-}
-}
-},1000/4)
-}
-//Setting game with spaces and letters to click on the side
-function prepare(){
-if(tip){document.getElementById("tip").innerHTML= "TIP: "+tip}else{document.getElementById("tip").innerHTML="No tip was given"}
-for(var i=0;i<lettersname.length;i++){
- letters.push(document.createElement("li"))
- letters[i].innerHTML= lettersname[i]
- letters[i].className="letter"
- document.getElementById("letters").appendChild(letters[i])
- }
- for(var i=0;i<word.length;i++){
-spaces.push(document.createElement("li"))
-spaces[i].className = "space"
-document.getElementById("space").appendChild(spaces[i])
-}
-     spacesput = document.querySelectorAll("li.space")      
+	var turn =0
+	var hanger= document.getElementById("hanger")
+	var hangman = ["url('hangman.png')","url('hangman2.png')","url('hangman3.png')",
+	"url('hangman4.png')","url('hangman5.png')","url('hangman6.png')"]
+	
+	var spaces=[]
+	var spacesput=[]
+	var word = prompt("Write the word to find").toUpperCase()
+	var tip = prompt("Add a tip if you wish!")
+	var found= 0
+	var lettersname=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"," "]
+	var letters=[]
+
+	var say
+	
+	var functione = function(e){
+		say = e.target.innerHTML
+		}
 	 
-}
 
-//Function to analyse letter
-function picking(pick)
- {
-if(word.indexOf(pick) != -1){
-for(var i=0;i<=word.length;i++){
-if(word.charAt(i)===pick &&spacesput[i].innerHTML != pick){
-spacesput[i].innerHTML = pick
-found+=1
-}
-}}
-else if(word.indexOf(pick)=== -1)
-{
-hanger.style.backgroundImage = (hangman[turn])
-turn+=1
+	 //Player chooses a letter
+	function choose(){
+		for(var i=0;i<lettersname.length;i++){
+			letters[i].addEventListener("click",functione,false)
+		}
+		
+		setInterval(function(){
+			if(say){
 
-}
-}
-
-function brain(){
-var passed=false
-setInterval(function(){
-if(turn<6 && found<word.length ){
-choose();
-}
-else if(found === word.length && passed===false){
-alert("You found the word! It was " + word+" ! Refresh to play again") 
-document.getElementById("message").innerHTML="Yaay! You found the word! It was " +word +". Refresh to play again."
-document.getElementById("hanger").style.backgroundImage="url('won.PNG')"
-passed=true
-}
-else if(turn === 6 && passed===false){
-
-alert("You got hanged! The word was" + word + " ! Refresh to play again")
-document.getElementById("message").innerHTML="You got hanged!!! The word was " +word +". Refresh to play again"
-document.getElementById("hanger").style.backgroundImage="url('hangman7.PNG')"
-passed=true
-
-}
-
-},1000)}
-
-prepare();
-brain();
+			picking(say.toUpperCase())
+			say=false
+			for(var i=0;i<lettersname.length;i++){
+			letters[i].removeEventListener("click",functione,false)
+			}
+					}
+							},1000/4)
+					}
 
 
 
+	//Setting game with spaces and letters to click on the side
+	function prepare(){
+	if(tip){document.getElementById("tip").innerHTML= "TIP: "+tip}else{document.getElementById("tip").innerHTML="No tip was given"}
+	for(var i=0;i<lettersname.length;i++){
+	 letters.push(document.createElement("li"))
+	 letters[i].innerHTML= lettersname[i]
+	 letters[i].className="letter"
+	 document.getElementById("letters").appendChild(letters[i])
+	 }
+	 for(var i=0;i<word.length;i++){
+	spaces.push(document.createElement("li"))
+	spaces[i].className = "space"
+	document.getElementById("space").appendChild(spaces[i])
+	}
+	     spacesput = document.querySelectorAll("li.space")      
+		 
+	}
+
+	//Function to analyse letter
+	function picking(pick)
+	 {
+	if(word.indexOf(pick) != -1){
+	for(var i=0;i<=word.length;i++){
+	if(word.charAt(i)===pick &&spacesput[i].innerHTML != pick){
+	spacesput[i].innerHTML = pick
+	found+=1
+	}
+	}}
+	else if(word.indexOf(pick)=== -1)
+	{
+	hanger.style.backgroundImage = (hangman[turn])
+	turn+=1
+
+	}
+	}
+
+	function brain(){
+	var passed=false
+	setInterval(function(){
+	if(turn<6 && found<word.length ){
+	choose();
+	}
+	else if(found === word.length && passed===false){
+	alert("You found the word! It was " + word+" ! Refresh to play again") 
+	document.getElementById("message").innerHTML="Yaay! You found the word! It was " +word +". Refresh to play again."
+	document.getElementById("hanger").style.backgroundImage="url('won.png')"
+	passed=true
+	}
+	else if(turn === 6 && passed===false){
+
+	alert("You got hanged! The word was" + word + " ! Refresh to play again")
+	document.getElementById("message").innerHTML="You got hanged!!! The word was " +word +". Refresh to play again"
+	document.getElementById("hanger").style.backgroundImage="url('hangman7.png')"
+	passed=true
+
+	}
+
+	},1000)}
+
+	prepare();
+	brain();
 
 
 
@@ -169,7 +191,10 @@ brain();
 
 
 
-</script>
+
+
+
+	</script>
 
 
 
